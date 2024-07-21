@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "681037793527",
+    "project_id": "adypkc-97b07",
+    "storage_bucket": "adypkc-97b07.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681037793527:android:c82f4445fed57e74ad6bf2",
+        "android_client_info": {
+          "package_name": "com.example.adypkc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN4qRIdpiP7aZC07g_hSTLITHAHfbDBL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
