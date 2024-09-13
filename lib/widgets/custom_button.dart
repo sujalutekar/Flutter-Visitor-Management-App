@@ -17,13 +17,13 @@ class CustomButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         style: ButtonStyle(
-          shape: MaterialStatePropertyAll(
+          shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
           ),
-          padding: const MaterialStatePropertyAll(EdgeInsets.all(12)),
-          backgroundColor: const MaterialStatePropertyAll(
+          padding: const WidgetStatePropertyAll(EdgeInsets.all(12)),
+          backgroundColor: const WidgetStatePropertyAll(
             Colors.blue,
           ),
         ),

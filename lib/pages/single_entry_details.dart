@@ -167,9 +167,9 @@ class _SingleEntryDetailsState extends State<SingleEntryDetails> {
                           ? TextButton(
                               style: const ButtonStyle(
                                 backgroundColor:
-                                    MaterialStatePropertyAll(Colors.blue),
+                                    WidgetStatePropertyAll(Colors.blue),
                                 foregroundColor:
-                                    MaterialStatePropertyAll(Colors.white),
+                                    WidgetStatePropertyAll(Colors.white),
                               ),
                               onPressed: () {
                                 saveOutTime(currentTime);
