@@ -25,7 +25,8 @@ class CustomTextField extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Colors.white,
+        color: Colors.black26,
+        border: Border.all(color: Colors.grey.shade800),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,10 +35,16 @@ class CustomTextField extends StatelessWidget {
             padding: const EdgeInsets.only(left: 4),
             child: Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.w500),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
           ),
-          TextField(
+          TextFormField(
+            validator: (value) {
+              if (value!.isEmpty || value.trim().isEmpty) {
+                return 'Please enter $title';
+              }
+              return null;
+            },
             maxLength: maxLength,
             controller: controller,
             decoration: InputDecoration(

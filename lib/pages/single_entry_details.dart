@@ -87,9 +87,7 @@ class _SingleEntryDetailsState extends State<SingleEntryDetails> {
             .format(context);
 
     return Scaffold(
-      backgroundColor: const Color(0xffF1F2FF),
       appBar: AppBar(
-        backgroundColor: const Color(0xffF1F2FF),
         title: Hero(
           tag: widget.docId,
           child: Text('${widget.index}'),
@@ -152,22 +150,22 @@ class _SingleEntryDetailsState extends State<SingleEntryDetails> {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
-                          color: isOutTimeSaved ? Colors.black : Colors.grey,
+                          color: isOutTimeSaved ? Colors.white : Colors.grey,
                         ),
                       ),
                       Text(
                         savedOutTime.isEmpty ? currentTime : savedOutTime,
                         style: TextStyle(
                           fontSize: 16,
-                          color: isOutTimeSaved ? Colors.black : Colors.grey,
+                          color: isOutTimeSaved ? Colors.white : Colors.grey,
                         ),
                       ),
                       const Spacer(),
                       isOutTimeSaved == false
                           ? TextButton(
-                              style: const ButtonStyle(
-                                backgroundColor:
-                                    WidgetStatePropertyAll(Colors.blue),
+                              style: ButtonStyle(
+                                backgroundColor: WidgetStatePropertyAll(
+                                    Colors.blueGrey.shade700),
                                 foregroundColor:
                                     WidgetStatePropertyAll(Colors.white),
                               ),

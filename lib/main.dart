@@ -20,9 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'ADYPKC',
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
+      darkTheme: ThemeData.dark(),
       home: const AuthPage(),
     );
   }

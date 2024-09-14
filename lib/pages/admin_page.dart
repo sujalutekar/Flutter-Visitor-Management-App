@@ -14,9 +14,9 @@ class _AdminPageState extends State<AdminPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF1F2FF),
+      // backgroundColor: const Color(0xffF1F2FF),
       appBar: AppBar(
-        backgroundColor: const Color(0xffF1F2FF),
+        // backgroundColor: const Color(0xffF1F2FF),
         title: const Text('Admin'),
         centerTitle: true,
       ),
@@ -50,7 +50,6 @@ class _AdminPageState extends State<AdminPage> {
                 return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 8),
                   decoration: BoxDecoration(
-                    // color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
@@ -59,7 +58,7 @@ class _AdminPageState extends State<AdminPage> {
                       // Displaying date
                       Container(
                         decoration: BoxDecoration(
-                          color: Colors.blue.shade100,
+                          color: Colors.blueGrey.shade700,
                         ),
                         width: double.infinity,
                         alignment: Alignment.center,

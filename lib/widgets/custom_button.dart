@@ -23,8 +23,8 @@ class CustomButton extends StatelessWidget {
             ),
           ),
           padding: const WidgetStatePropertyAll(EdgeInsets.all(12)),
-          backgroundColor: const WidgetStatePropertyAll(
-            Colors.blue,
+          backgroundColor: WidgetStatePropertyAll(
+            Colors.blueGrey.shade700,
           ),
         ),
         onPressed: onPressed,

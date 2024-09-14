@@ -23,16 +23,16 @@ class _DatePickerState extends State<DatePicker> {
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Colors.white,
+        color: Colors.black26,
+        border: Border.all(color: Colors.grey.shade800),
       ),
       child: Center(
         child: TextField(
-          // controller: widget.dateController,
           decoration: InputDecoration(
             border: InputBorder.none,
             icon: const Icon(Icons.calendar_month_outlined),
             hintText: formattedDate.isEmpty
-                ? DateFormat('yMMMMd').format(DateTime.now())
+                ? DateFormat('yMMMd').format(DateTime.now())
                 : null,
           ),
           readOnly: true,
@@ -99,11 +99,11 @@ class _TimePickerState extends State<TimePicker> {
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Colors.white,
+        color: Colors.black26,
+        border: Border.all(color: Colors.grey.shade800),
       ),
       child: Center(
         child: TextField(
-          // controller: widget.timeController,
           decoration: InputDecoration(
             border: InputBorder.none,
             icon: const Icon(Icons.timelapse_outlined),

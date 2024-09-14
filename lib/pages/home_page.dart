@@ -13,7 +13,6 @@ import 'package:adypkc/widgets/custom_button.dart';
 import 'package:adypkc/widgets/custom_textfield.dart';
 import 'package:adypkc/widgets/date_time_picker.dart';
 import 'package:adypkc/services/upload_image.dart';
-// import 'package:adypkc/services/auto_delete_data.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController phoneNoController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController reasonController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey();
 
   File? _selectedImage;
   Uint8List? image;
@@ -78,31 +78,16 @@ class _HomePageState extends State<HomePage> {
 
   void submit() async {
     try {
-      if (_selectedImage == null ||
-          nameController.text.isEmpty ||
-          addressController.text.isEmpty ||
-          reasonController.text.isEmpty) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return const AlertDialog(
-              title: Text('Please fill all fields'),
-            );
-          },
-        );
-
+      if (!formKey.currentState!.validate()) {
         return;
       }
 
       if (phoneNoController.text.length != 10) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return const AlertDialog(
-              title: Text('Invalid phone number'),
-            );
-          },
-        );
+        AnimatedSnackBar.removeAll();
+        AnimatedSnackBar.material(
+          'Invalid Phone Number',
+          type: AnimatedSnackBarType.error,
+        ).show(context);
 
         return;
       }
@@ -194,11 +179,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF1F2FF),
+      // backgroundColor: const Color(0xffF1F2FF),
+      // backgroundColor: C,
       appBar: AppBar(
         title: const Text('ADYPG'),
         centerTitle: true,
-        backgroundColor: const Color(0xffF1F2FF),
+        // backgroundColor: const Color(0xffF1F2FF),
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 12),
@@ -217,139 +203,142 @@ class _HomePageState extends State<HomePage> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 16),
-                          const Text(
-                            'Enter a new entry',
-                            style: TextStyle(
-                                fontSize: 28, fontWeight: FontWeight.w500),
-                          ),
-                          const SizedBox(height: 16),
+          : Form(
+              key: formKey,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 16),
+                            const Text(
+                              'Enter a new entry',
+                              style: TextStyle(
+                                  fontSize: 28, fontWeight: FontWeight.w500),
+                            ),
+                            const SizedBox(height: 16),
 
-                          // display image from camera
-                          _selectedImage != null
-                              ? Container(
-                                  alignment: Alignment.center,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.3,
-                                  child: _selectedImage != null
-                                      ? Image.file(_selectedImage!)
-                                      : null,
-                                )
-                              : const SizedBox.shrink(),
+                            // display image from camera
+                            _selectedImage != null
+                                ? Container(
+                                    alignment: Alignment.center,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.3,
+                                    child: _selectedImage != null
+                                        ? Image.file(_selectedImage!)
+                                        : null,
+                                  )
+                                : const SizedBox.shrink(),
 
-                          _selectedImage != null
-                              ? const SizedBox(height: 20)
-                              : SizedBox.fromSize(),
+                            _selectedImage != null
+                                ? const SizedBox(height: 20)
+                                : SizedBox.fromSize(),
 
-                          // Camera
-                          Align(
-                            alignment: Alignment.center,
-                            child: InkWell(
-                              onTap: () => _pickImageFromCamera(),
-                              child: Container(
-                                padding: const EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const Icon(Icons.camera,
-                                        color: Colors.white),
-                                    const SizedBox(width: 4),
-                                    _selectedImage == null
-                                        ? const Text(
-                                            'Camera',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500,
+                            // Camera
+                            Align(
+                              alignment: Alignment.center,
+                              child: InkWell(
+                                onTap: () => _pickImageFromCamera(),
+                                child: Container(
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    color: Colors.blueGrey.shade700,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(Icons.camera,
+                                          color: Colors.white),
+                                      const SizedBox(width: 4),
+                                      _selectedImage == null
+                                          ? const Text(
+                                              'Camera',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            )
+                                          : const Text(
+                                              'Change Image',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
-                                          )
-                                        : const Text(
-                                            'Change Image',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
 
-                          const SizedBox(height: 12),
+                            const SizedBox(height: 12),
 
-                          // Name
-                          CustomTextField(
-                            controller: nameController,
-                            title: 'Name',
-                            hintText: 'Eg: Sujal',
-                            keyboardType: TextInputType.name,
-                          ),
+                            // Name
+                            CustomTextField(
+                              controller: nameController,
+                              title: 'Name',
+                              hintText: 'Eg: Sujal',
+                              keyboardType: TextInputType.name,
+                            ),
 
-                          // Phone Number
-                          CustomTextField(
-                            controller: phoneNoController,
-                            title: 'Phone Number',
-                            hintText: 'Eg: 1234567899',
-                            keyboardType: TextInputType.phone,
-                            maxLength: 10,
-                          ),
+                            // Phone Number
+                            CustomTextField(
+                              controller: phoneNoController,
+                              title: 'Phone Number',
+                              hintText: 'Eg: 1234567899',
+                              keyboardType: TextInputType.phone,
+                              maxLength: 10,
+                            ),
 
-                          // Address
-                          CustomTextField(
-                            controller: addressController,
-                            title: 'Address',
-                            hintText: 'Eg: Dhanori',
-                            keyboardType: TextInputType.streetAddress,
-                          ),
+                            // Address
+                            CustomTextField(
+                              controller: addressController,
+                              title: 'Address',
+                              hintText: 'Eg: Dhanori',
+                              keyboardType: TextInputType.streetAddress,
+                            ),
 
-                          // Reason
-                          CustomTextField(
-                            controller: reasonController,
-                            title: 'Reason',
-                            hintText: 'Eg: To meet a friend',
-                            keyboardType: TextInputType.text,
-                            textInputAction: TextInputAction.done,
-                          ),
+                            // Reason
+                            CustomTextField(
+                              controller: reasonController,
+                              title: 'Reason',
+                              hintText: 'Eg: To meet a friend',
+                              keyboardType: TextInputType.text,
+                              textInputAction: TextInputAction.done,
+                            ),
 
-                          // Date and Time
-                          const Row(
-                            children: [
-                              Expanded(
-                                child: DatePicker(),
-                              ),
-                              SizedBox(width: 10),
-                              Expanded(
-                                child: TimePicker(),
-                              )
-                            ],
-                          ),
-                        ],
+                            // Date and Time
+                            const Row(
+                              children: [
+                                Expanded(
+                                  child: DatePicker(),
+                                ),
+                                SizedBox(width: 10),
+                                Expanded(
+                                  child: TimePicker(),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
 
-                  // Submit Button
-                  CustomButton(
-                    onPressed: () {
-                      submit();
-                    },
-                    title: 'Submit',
-                  ),
-                ],
+                    // Submit Button
+                    CustomButton(
+                      onPressed: () {
+                        submit();
+                      },
+                      title: 'Submit',
+                    ),
+                  ],
+                ),
               ),
             ),
     );
